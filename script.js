@@ -8,36 +8,86 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
 
     if (playerSelection === computerSelection) {
-        return "It's a draw";
+        return "draw";
     }
 
     if (playerSelection === "rock") {
         if (computerSelection === "paper") {
-            return "You lose! Paper beats rock";
+            return "loss";
         }
 
         if (computerSelection === "scissors") {
-            return "You win! Rock beats scissors";
+            return "win";
         }
     }
 
     if (playerSelection === "paper") {
         if (computerSelection === "scissors") {
-            return "You lose! Scissors beats paper";
+            return "loss";
         }
 
         if (computerSelection === "rock") {
-            return "You win! Paper beats rock";
+            return "win";
         }
     }
 
     if (playerSelection === "scissors") {
         if (computerSelection === "rock") {
-            return "You lose! Rock beats scissors";
+            return "loss";
         }
 
         if (computerSelection === "paper") {
-            return "You win! Scissors beats paper";
+            return "win";
         }
     }
 }
+
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        console.log(`Round ${i + 1} / 5`);
+        while (true) {
+            playerSelection = prompt("What's your move (rock/paper/scissors)");
+
+            if (
+                playerSelection.toLowerCase() === "rock" ||
+                playerSelection.toLowerCase() === "paper" ||
+                playerSelection.toLowerCase() === "scissors"
+            ) {
+                break;
+            } else {
+                console.log("Please type a valid input!");
+                continue;
+            }
+        }
+
+        computerSelection = getComputerChoice();
+        result = playRound(playerSelection, computerSelection);
+
+        message = `You chose ${playerSelection}, and the computer chose... ${computerSelection}! `;
+
+        switch (result) {
+            case "draw":
+                message += "It was a draw. Let's do that again!";
+                i--;
+                break;
+            case "loss":
+                message += "You lost :(";
+                computerScore++;
+                break;
+            case "win":
+                message += "You won! :) ";
+                playerScore++;
+                break;
+        }
+
+        console.log(message);
+        console.log(
+            `Your score: ${playerScore}    :    Computer's score: ${computerScore}`
+        );
+    }
+}
+
+game();
