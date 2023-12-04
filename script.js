@@ -1,3 +1,15 @@
+const buttons = document.querySelectorAll(".playerChoices>button");
+const playerChoiceParagraph = document.querySelector(".player-choice");
+const computerChoiceParagraph = document.querySelector(".computer-choice");
+const resultsParagraph = document.querySelector(".game-result");
+const playerScoreParagraph = document.querySelector(".player-score");
+const computerScoreParagraph = document.querySelector(".computer-score");
+const roundText = document.querySelector(".round");
+
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
+
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
     let random_index = Math.floor(Math.random() * 3);
@@ -42,52 +54,44 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        playerChoiceParagraph.textContent = "";
+        computerChoiceParagraph.textContent = "";
+        resultsParagraph.textContent = "";
 
-    for (let i = 0; i < 5; i++) {
-        console.log(`Round ${i + 1} / 5`);
-        while (true) {
-            playerSelection = prompt("What's your move (rock/paper/scissors)");
+        const playerChoice = event.target.id;
+        const computerChoice = getComputerChoice();
 
-            if (
-                playerSelection.toLowerCase() === "rock" ||
-                playerSelection.toLowerCase() === "paper" ||
-                playerSelection.toLowerCase() === "scissors"
-            ) {
-                break;
-            } else {
-                console.log("Please type a valid input!");
-                continue;
+        playerChoiceParagraph.textContent = playerChoice;
+        computerChoiceParagraph.textContent = "choosing...";
+
+        setTimeout(() => {
+            computerChoiceParagraph.textContent = computerChoice;
+            const result = playRound(playerChoice, computerChoice);
+
+            round++;
+            switch (result) {
+                case "win":
+                    playerScore++;
+                    message = "You won! :) ";
+
+                    break;
+                case "loss":
+                    computerScore++;
+                    message = "You lost :(";
+
+                    break;
+                case "draw":
+                    round--;
+                    message = "It was a draw. Let's do that again!";
+                    break;
             }
-        }
 
-        computerSelection = getComputerChoice();
-        result = playRound(playerSelection, computerSelection);
-
-        message = `You chose ${playerSelection}, and the computer chose... ${computerSelection}! `;
-
-        switch (result) {
-            case "draw":
-                message += "It was a draw. Let's do that again!";
-                i--;
-                break;
-            case "loss":
-                message += "You lost :(";
-                computerScore++;
-                break;
-            case "win":
-                message += "You won! :) ";
-                playerScore++;
-                break;
-        }
-
-        console.log(message);
-        console.log(
-            `Your score: ${playerScore}    :    Computer's score: ${computerScore}`
-        );
-    }
-}
-
-game();
+            resultsParagraph.textContent = message;
+            playerScoreParagraph.textContent = playerScore;
+            computerScoreParagraph.textContent = computerScore;
+            roundText.textContent = round + 1;
+        }, 3000);
+    });
+});
