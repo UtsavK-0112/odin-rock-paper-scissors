@@ -10,6 +10,20 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0;
 
+function getImageForObject(object) {
+    let image = document.createElement("img");
+
+    object = object.ToLowerCase();
+    switch (object) {
+        case "rock":
+            break;
+        case "paper":
+            break;
+        case "scissors":
+            break;
+    }
+}
+
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
     let random_index = Math.floor(Math.random() * 3);

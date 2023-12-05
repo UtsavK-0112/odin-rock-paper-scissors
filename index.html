@@ -6,9 +6,12 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <title>Odin Rock Paper Scissors</title>
         <script src="script.js" defer></script>
+        <link rel="stylesheet" href="style.css"></link>
     </head>
     <body>
-        <h1>Rock Paper Scissors</h1>
+        <div class="root">
+            
+            <h1><img src="favicon.ico" alt="">Rock Paper Scissors</h1>
         <h2>Round <span class="round">1</span></h2>
         <div class="playerChoices">
             <button id="rock">Rock</button>
@@ -22,11 +25,17 @@
             <p class="computer-score">0</p>
         </span>
         <div class="display">
-            <h2>Your Choice</h2>
-            <p class="player-choice"></p>
-            <h2>Computer's Choice</h2>
-            <p class="computer-choice"></p>
-            <p class="game-result"></p>
+            <div>
+                <h2>Your Choice</h2>
+                <p class="player-choice"></p>
+            </div>
+            <div>
+                <h2>Computer's Choice</h2>
+                <p class="computer-choice"></p>
+            </div>
         </div>
+        <p class="game-result"></p>
+        </div>
+        
     </body>
 </html>
