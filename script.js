@@ -18,6 +18,19 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0;
 
+function resetGame() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let round = 0;
+}
+
+function resetRound() {
+    playerChoiceImage.src = "waiting.png";
+    computerChoiceImage.src = "waiting.png";
+
+    resultsParagraph.textContent = "Choose a move!";
+}
+
 function getImageURLForObject(object) {
     let URL;
 
@@ -122,8 +135,11 @@ buttons.forEach((button) => {
             playerScoreParagraph.textContent = playerScore;
             computerScoreParagraph.textContent = computerScore;
 
-            round++;
-            roundText.textContent = round + 1;
+            setTimeout(() => {
+                resetRound();
+                round++;
+                roundText.textContent = round + 1;
+            }, 2000);
         }, 2000);
     });
 });
