@@ -18,6 +18,18 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0;
 
+function disableButtons() {
+    buttons.forEach((button) => {
+        button.setAttribute("disabled", "");
+    });
+}
+
+function enableButtons() {
+    buttons.forEach((button) => {
+        button.removeAttribute("disabled");
+    });
+}
+
 function resetGame() {
     let playerScore = 0;
     let computerScore = 0;
@@ -96,6 +108,8 @@ function playRound(playerSelection, computerSelection) {
 
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
+        disableButtons();
+
         playerChoiceParagraph.textContent = "";
         computerChoiceParagraph.textContent = "";
         resultsParagraph.textContent = "";
@@ -139,7 +153,8 @@ buttons.forEach((button) => {
                 resetRound();
                 round++;
                 roundText.textContent = round + 1;
-            }, 2000);
+                enableButtons();
+            }, 2500);
         }, 2000);
     });
 });
