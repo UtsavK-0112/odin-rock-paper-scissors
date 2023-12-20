@@ -1,3 +1,4 @@
+// SELECTORS
 const roundText = document.querySelector(".round");
 const buttons = document.querySelectorAll(".playerChoices>button");
 
@@ -14,9 +15,17 @@ const computerChoiceDiv = document.querySelector(".computer-choice");
 const playerChoiceImage = document.querySelector(".player-image");
 const computerChoiceImage = document.querySelector(".computer-image");
 
+const replayButton = document.querySelector(".replay-button");
+const roundOverMessageContainer = document.querySelector(
+    ".round-over-message-container"
+);
+
+// VARIABLES
 let playerScore = 0;
 let computerScore = 0;
 let round = 0;
+
+// FUNCTIONS
 
 function disableButtons() {
     buttons.forEach((button) => {
@@ -31,9 +40,9 @@ function enableButtons() {
 }
 
 function resetGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let round = 0;
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
 }
 
 function resetRound() {
@@ -106,6 +115,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// EVENT LISTENERS
+
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
         disableButtons();
@@ -150,11 +161,21 @@ buttons.forEach((button) => {
             computerScoreParagraph.textContent = computerScore;
 
             setTimeout(() => {
-                resetRound();
-                round++;
-                roundText.textContent = round + 1;
-                enableButtons();
-            }, 2500);
-        }, 2000);
+                if (round === 4) {
+                    roundOverMessageContainer.style.display = "flex";
+                } else {
+                    resetRound();
+                    round++;
+                    roundText.textContent = round + 1;
+                    enableButtons();
+                }
+            }, 1);
+        }, 1);
     });
+});
+
+roundOverMessageContainer.style.display = "flex";
+replayButton.addEventListener("click", (event) => {
+    resetGame();
+    roundOverMessageContainer.style.display = "none";
 });
