@@ -6,54 +6,60 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <title>Odin Rock Paper Scissors</title>
         <script src="script.js" defer></script>
-        <link rel="stylesheet" href="style.css"></link>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div class="round-over-message-container">
-            <div class="round-over-message">
-                <p class="game-result-message">You won!</p>
-                <span class="message-scores">
-                    <p>Your score: <span class="message-player-score">5</span></p>
-                    <p>Computer's score: <span class="message-computer-score">3</span></p>
-                    <button class="replay-button">Play Again</button>
-
+        <div class="game-over-message-container">
+            <div class="game-over-message">
+                <h1>Game Over</h1>
+                <p class="--message-game-result">You won!</p>
+                <span class="--message-scores">
+                    <p>
+                        Your score:
+                        <span class="--message-player-score">5</span>
+                    </p>
+                    <p>
+                        Computer's score:
+                        <span class="--message-computer-score">3</span>
+                    </p>
                 </span>
+                <button class="replay-button">Play Again</button>
             </div>
         </div>
         <div class="root">
-            
-            <h1><img src="favicon.ico" alt="">Rock Paper Scissors</h1>
-        <h2>Round <span class="round">1</span></h2>
-        <div class="playerChoices">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
-        </div>
-        <span class="score-container">
-            Player:
-            <p class="player-score">0</p>
-            Computer:
-            <p class="computer-score">0</p>
-        </span>
-        <div class="display">
-            <div class="player-choice">
-                <h2>Your Choice</h2>
-                <div class="img-div">
-                    <img src="waiting.png" alt="" class="player-image">
-                </div>
-                <p class="player-choice-text"></p>
+            <header>
+                <img id="logo" src="favicon.ico" />
+                <h1>Rock Paper Scissors</h1>
+                <h2>Best of five</h2>
+            </header>
+            <h2>Round <span class="round">1</span></h2>
+            <div class="playerChoices">
+                <button id="rock"><img src="rock.png" />Rock</button>
+                <button id="paper"><img src="paper.png" />Paper</button>
+                <button id="scissors">
+                    <img src="scissors.png" />Scissors
+                </button>
             </div>
-            <div class="computer-choice">
-                <h2>Computer's Choice</h2>
-                <div class="img-div">
-                    <img src="waiting.png" alt="" class="computer-image">
+            <span class="score-container">
+                <p>Your score: <span class="player-score">5</span></p>
+                <p>Computer's score: <span class="computer-score">3</span></p>
+            </span>
+            <div class="display">
+                <div class="player-choice">
+                    <div class="img-div">
+                        <img src="waiting.png" alt="" class="player-image" />
+                    </div>
+                    <p class="player-choice-text"></p>
                 </div>
+                <div class="computer-choice">
+                    <div class="img-div">
+                        <img src="waiting.png" alt="" class="computer-image" />
+                    </div>
 
-                <p class="computer-choice-text"></p>
+                    <p class="computer-choice-text"></p>
+                </div>
             </div>
+            <p class="game-result">Choose a move!</p>
         </div>
-        <p class="game-result">Choose a move!</p>
-        </div>
-        
     </body>
 </html>

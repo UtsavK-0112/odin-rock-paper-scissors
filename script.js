@@ -16,8 +16,8 @@ const playerChoiceImage = document.querySelector(".player-image");
 const computerChoiceImage = document.querySelector(".computer-image");
 
 const replayButton = document.querySelector(".replay-button");
-const roundOverMessageContainer = document.querySelector(
-    ".round-over-message-container"
+const gameOverMessageContainer = document.querySelector(
+    ".game-over-message-container"
 );
 
 // VARIABLES
@@ -43,11 +43,18 @@ function resetGame() {
     playerScore = 0;
     computerScore = 0;
     round = 0;
+
+    playerScoreParagraph.textContent = playerScore;
+    computerScoreParagraph.textContent = computerScore;
+    roundText.textContent = round + 1;
 }
 
 function resetRound() {
     playerChoiceImage.src = "waiting.png";
     computerChoiceImage.src = "waiting.png";
+
+    playerChoiceParagraph.textContent = "";
+    computerChoiceParagraph.textContent = "";
 
     resultsParagraph.textContent = "Choose a move!";
 }
@@ -162,20 +169,23 @@ buttons.forEach((button) => {
 
             setTimeout(() => {
                 if (round === 4) {
-                    roundOverMessageContainer.style.display = "flex";
+                    gameOverMessageContainer.style.display = "flex";
                 } else {
-                    resetRound();
                     round++;
                     roundText.textContent = round + 1;
-                    enableButtons();
                 }
-            }, 1);
-        }, 1);
+
+                resetRound();
+
+                enableButtons();
+            }, 2500);
+        }, 1500);
     });
 });
 
-roundOverMessageContainer.style.display = "flex";
+gameOverMessageContainer.style.display = "flex";
+
 replayButton.addEventListener("click", (event) => {
     resetGame();
-    roundOverMessageContainer.style.display = "none";
+    gameOverMessageContainer.style.display = "none";
 });
