@@ -19,6 +19,11 @@ const replayButton = document.querySelector(".replay-button");
 const gameOverMessageContainer = document.querySelector(
     ".game-over-message-container"
 );
+const gameOverElements = {
+    resultParagraph: document.querySelector(".--message-game-result"),
+    playerScoreParagraph: document.querySelector(".--message-player-score"),
+    computerScoreParagraph: document.querySelector(".message-computer-score"),
+};
 
 // VARIABLES
 let playerScore = 0;
@@ -26,6 +31,11 @@ let computerScore = 0;
 let round = 0;
 
 // FUNCTIONS
+function setGameOverMessage(result, playerScore, computerScore) {
+    gameOverElements.resultParagraph.textContent = result;
+    gameOverElements.playerScoreParagraph.textContent = playerScore;
+    gameOverElements.computerScoreParagraph = computerScore;
+}
 
 function disableButtons() {
     buttons.forEach((button) => {
@@ -132,7 +142,7 @@ buttons.forEach((button) => {
         computerChoiceParagraph.textContent = "";
         resultsParagraph.textContent = "";
 
-        const playerChoice = event.target.id;
+        const playerChoice = button.id;
         const computerChoice = getComputerChoice();
 
         playerChoiceImage.src = getImageURLForObject(playerChoice);
@@ -150,25 +160,33 @@ buttons.forEach((button) => {
             switch (result) {
                 case "win":
                     playerScore++;
-                    message = "You won! :) ";
+                    resultsParagraph.textContent = "You won! :) ";
 
                     break;
                 case "loss":
                     computerScore++;
-                    message = "You lost :(";
+                    resultsParagraph.textContent = "You lost :(";
                     break;
                 case "draw":
                     round--;
-                    message = "It was a draw. Let's do that again!";
+                    resultsParagraph.textContent =
+                        "It was a draw. Let's do that again!";
                     break;
             }
 
-            resultsParagraph.textContent = message;
             playerScoreParagraph.textContent = playerScore;
             computerScoreParagraph.textContent = computerScore;
 
             setTimeout(() => {
                 if (round === 4) {
+                    setGameOverMessage(
+                        playerScore > computerScore
+                            ? "You won!"
+                            : "You lost :(",
+                        playerScore,
+                        computerScore
+                    );
+
                     gameOverMessageContainer.style.display = "flex";
                 } else {
                     round++;
@@ -182,8 +200,6 @@ buttons.forEach((button) => {
         }, 1500);
     });
 });
-
-gameOverMessageContainer.style.display = "flex";
 
 replayButton.addEventListener("click", (event) => {
     resetGame();
